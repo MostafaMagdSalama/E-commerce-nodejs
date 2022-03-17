@@ -1,0 +1,27 @@
+mongoDB strucutre for e-commerce application 
+1- products 
+   1- name => string 
+   2- price => number
+   3- quantity => number
+   4- description => string 
+   5- details => string 
+   6- pictures => array of urls 
+
+2- users
+  1- email
+  2- first name 
+  3- last name 
+  4- hashed password
+  5- address {country , street , city , zip }
+
+3- payments
+   1- user Email 
+   2- type 
+   3- card{type , number , expiryMonth , expiryYear , cvv } 
+
+4- orders
+   1- pruducts[
+       {_id , quantity , price}
+   ]
+   2- user_Id
+   3- createdAt
