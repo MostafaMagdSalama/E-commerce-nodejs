@@ -17,6 +17,10 @@ const productSchema=new Schema({
         required:false,
         type:String
     },
+    category:{
+        required:false,
+        type:String
+    },
     pictures:[{
         required:false,
         type:String

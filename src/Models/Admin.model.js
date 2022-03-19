@@ -1,8 +1,6 @@
 const mongoose=require('mongoose');
-const bcrypt = require('bcrypt');
-// const ApiError=require('../Helpers/ApiError')
 const { Schema } = mongoose;
-const userSchema=new Schema({
+const adminSchema=new Schema({
     email:{
         required:true,
         type:String,
@@ -16,30 +14,18 @@ const userSchema=new Schema({
         required:true,
         type:String
     },
-    hashedPassword:{
+    password:{
         required:true,
         type:String
     },
-   address:{
-       country:{
-        required:false,
-        type:String
-       },
-       street:{
-        required:false,
-        type:String
-       },
-       city:{
-        required:false,
-        type:String
-       }
-   },
    phone:{
-    required:false,
-    type:String 
+       required:false,
+       type:String 
    }
 })
-userSchema.pre('save',function(next) {
+
+
+adminSchema.pre('save',function(next) {
     var user=this;
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(user.hashedPassword, salt, function(err, hash) {
@@ -50,10 +36,10 @@ userSchema.pre('save',function(next) {
     });
    
   });
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
+  adminSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.hashedPassword, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });
 }
-module.exports=mongoose.model('User',userSchema)
+module.exports=mongoose.model('Admin',adminSchema)

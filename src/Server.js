@@ -6,8 +6,6 @@ const app=express()
 
 app.use(morgan('tiny'))
 
-
-
 //connect database
 require('./Config/ConnectDB');
 //parssing data
@@ -17,6 +15,8 @@ app.use(express.json());
 app.use('/users',require('./Routes/User.router'))
 //products routes
 app.use('/products',require('./Routes/Product.router'))
+//ad,oms routes
+app.use('/admins',require('./Routes/Admin.router'))
 
 
 //error handling 

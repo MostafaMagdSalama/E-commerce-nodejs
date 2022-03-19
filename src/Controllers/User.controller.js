@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 const UserModel = require('../Models/User.model')
 const ApiError= require('../Helpers/ApiError')
-const util=require('util').promisify
+const util=require('util').promisify;
+const _=require('lodash');
 const { body, validationResult } = require('express-validator');
 
 
@@ -30,8 +31,6 @@ module.exports.register=async (req, res, next) => {
        }
        res.status(200).json({status:"success",data:"user added succsufully"})
    })
-   
-
 }
 module.exports.login=async (req,res,next)=>{
     const {email, password}=req.body;
@@ -58,4 +57,16 @@ module.exports.login=async (req,res,next)=>{
     next(ApiError.forbiddenRequest("email or password not correct"));
 })
        
+}
+module.exports.userData=async(req,res,next)=>
+{
+    try{
+       let user=await UserModel.findById(req.userId);
+      user=_.omit(user.toObject(),['hashedPassword']);
+       res.status(200).json({ststus:"success",data:user})
+
+    }
+    catch(err){
+        next(ApiError.forbiddenRequest(err.message));
+    }
 }
