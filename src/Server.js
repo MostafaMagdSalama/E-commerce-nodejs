@@ -1,8 +1,11 @@
 const express =require('express')
+const cors = require('cors')
 var morgan = require('morgan')
 const{handleError}=require('./Middlewares/ErrorHandling.middleware')
 const app=express()
 
+app.use(cors())
+require('express-async-errors');
 
 app.use(morgan('tiny'))
 
@@ -17,6 +20,7 @@ app.use('/users',require('./Routes/User.router'))
 app.use('/products',require('./Routes/Product.router'))
 //ad,oms routes
 app.use('/admins',require('./Routes/Admin.router'))
+app.use('/orders',require('./Routes/Order.router'))
 
 
 //error handling 

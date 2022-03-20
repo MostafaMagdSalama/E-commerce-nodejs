@@ -18,7 +18,13 @@ const orderSchema=new Schema({
     userId:{
         required:true,
         type:mongoose.Types.ObjectId
-    }
+    },
+    status:{
+        required:false,
+        type:String,
+        default:"pending"
+    },
+
 })
 
 module.exports=mongoose.model('Order',orderSchema)

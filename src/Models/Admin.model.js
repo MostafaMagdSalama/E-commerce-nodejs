@@ -1,4 +1,6 @@
 const mongoose=require('mongoose');
+const bcrypt = require('bcrypt');
+
 const { Schema } = mongoose;
 const adminSchema=new Schema({
     email:{
@@ -28,16 +30,16 @@ const adminSchema=new Schema({
 adminSchema.pre('save',function(next) {
     var user=this;
     bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(user.hashedPassword, salt, function(err, hash) {
-           user.hashedPassword=hash;
-           console.log(user.hashedPassword)
+        bcrypt.hash(user.password, salt, function(err, hash) {
+           user.password=hash;
+           console.log(user.password)
            next();
         });
     });
    
   });
   adminSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.hashedPassword, function(err, isMatch) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err) return cb(err);
         cb(null, isMatch);
     });

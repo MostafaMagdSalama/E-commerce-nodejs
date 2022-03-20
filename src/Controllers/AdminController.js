@@ -20,8 +20,9 @@ module.exports.adminLogin=async(req,res,next)=>
     try{
         const {email , password} = req.body;
         const admin = await AdminModel.findOne({email})
+        console.log(admin)
         if(admin){
-            AdminModel.comparePassword(password,(err , isMatch)=>{
+            admin.comparePassword(password,(err , isMatch)=>{
                 if(err)
                 {
                     next(ApiError.internalRequest(err.message))
@@ -30,12 +31,12 @@ module.exports.adminLogin=async(req,res,next)=>
                 if(isMatch)
                 {
                     const adminId=admin._id;
-                    const token = jwt.sign({adminId, isAdmin:true },'omnia');
+                    const token = jwt.sign({adminId, isAdminCheck:true },'omnia');
                     res.status(200).json({ststus:"success",token})
                   
                 }
                 else {
-                    next(ApiError.forbiddenRequest(err.message))
+                    next(ApiError.forbiddenRequest("dosnt match any data in database"))
                     return ;
                 }
 
