@@ -3,17 +3,12 @@ const UserModel = require('../Models/User.model')
 const ApiError= require('../Helpers/ApiError')
 const util=require('util').promisify;
 const _=require('lodash');
-const { body, validationResult } = require('express-validator');
 
 
 module.exports.register=async (req, res, next) => {
     const { email, firstName, lastName, password, country, street, zip } = req.body;
-    const errors = validationResult(req);
     const user=await UserModel.findOne({email});
-    if (errors.errors.length) {
-        res.status(404).json(!errors.errors.length)
-        return ;
-    }
+  
    if(user){
     next(ApiError.internalRequest("this user already exists"));
     return ;
