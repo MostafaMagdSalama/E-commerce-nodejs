@@ -31,7 +31,7 @@ module.exports.adminLogin=async(req,res,next)=>
                 if(isMatch)
                 {
                     const adminId=admin._id;
-                    const token = jwt.sign({adminId, isAdminCheck:true },'omnia');
+                    const token = jwt.sign({adminId, isAdminCheck:true },'mostafa');
                     res.status(200).json({ststus:"success",token})
                   
                 }

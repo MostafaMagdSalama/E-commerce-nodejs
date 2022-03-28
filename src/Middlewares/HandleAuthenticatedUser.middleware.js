@@ -3,7 +3,7 @@ const ApiError = require('../Helpers/ApiError');
 const handleAuthenticatedUser=(req,res,next)=>{
     try{
         const {token}=req.body;
-        const decoded = jwt.verify(token, 'omnia');
+        const decoded = jwt.verify(token, 'mostafa');
         req.userId=decoded.userId;
         next();
     }

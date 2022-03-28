@@ -3,7 +3,7 @@ const ApiError = require('../Helpers/ApiError')
 const isAdmin=(req,res,next)=>{
     try{
       const {token} = req.body;
-  const {adminId , isAdminCheck}= jwt.verify(token,"omnia")
+  const {adminId , isAdminCheck}= jwt.verify(token,"mostafa")
   if(!isAdminCheck)
   {
       console.log(adminId)
