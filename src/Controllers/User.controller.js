@@ -2,6 +2,11 @@ const jwt = require('jsonwebtoken')
 const UserModel = require('../Models/User.model')
 const ApiError= require('../Helpers/ApiError')
 const util=require('util').promisify;
+
+
+
+
+
 const _=require('lodash');
 
 
@@ -19,12 +24,11 @@ module.exports.register=async (req, res, next) => {
    .then((data,error)=>{
        if(error)
        {
-        console.log('here')
-
         res.status(404).json(error);
         return ;
        }
        res.status(200).json({status:"success",data:"user added succsufully"})
+       return ;
    })
 }
 module.exports.login=async (req,res,next)=>{

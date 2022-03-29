@@ -6,7 +6,7 @@ module.exports.handleError=(err,req,res,next)=>{
     if(err instanceof ApiError)
     {
         res.status(err.code).json(err.message);
+        return ;
     }
     res.json({status:"failed",message:err.message})
-next();
 }
