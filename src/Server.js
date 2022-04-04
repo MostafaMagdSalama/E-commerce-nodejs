@@ -23,6 +23,7 @@ app.use('/products',require('./Routes/Product.router'))
 //ad,oms routes
 app.use('/admins',require('./Routes/Admin.router'))
 app.use('/orders',require('./Routes/Order.router'))
+app.use('/wishlist',require('./Routes/WishList'))
 
 
 //error handling 

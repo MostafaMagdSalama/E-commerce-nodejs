@@ -37,6 +37,11 @@ const userSchema=new Schema({
    phone:{
     required:false,
     type:String 
+   },
+   isAdmin:{
+    required:false,
+    type:Boolean, 
+    default:false
    }
 })
 userSchema.pre('save',function(next) {

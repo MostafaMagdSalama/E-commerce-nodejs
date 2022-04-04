@@ -17,14 +17,15 @@ const productSchema=new Schema({
         required:false,
         type:String
     },
-    category:{
+    categoryId:{
         required:false,
-        type:String
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Category"
     },
-    pictures:[{
+    pictures:{
         required:false,
         type:String
-    }]
+    }
 })
 
 module.exports=mongoose.model('Product',productSchema)

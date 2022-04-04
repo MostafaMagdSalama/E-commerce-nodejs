@@ -49,7 +49,9 @@ module.exports.login=async (req,res,next)=>{
     {
         const userId=user._id;
         const token = jwt.sign({userId }, 'mostafa');
-        res.status(200).json({ststus:"success",token})
+        console.log(user.name)
+        res.status(200).json({ststus:"success",data:
+        {token,userId,name:user.name, isAdmin:user.isAdmin, firstName:user.firstName, lastName:user.lastName}})
         return;
     }
 
