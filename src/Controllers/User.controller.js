@@ -11,7 +11,7 @@ const _=require('lodash');
 
 
 module.exports.register=async (req, res, next) => {
-    const { email, firstName, lastName, password, country, street, zip } = req.body;
+    const { email, firstName, lastName, password, country, street, zip , isAdmin } = req.body;
     const user=await UserModel.findOne({email});
   
    if(user){
@@ -19,7 +19,7 @@ module.exports.register=async (req, res, next) => {
     return ;
    }
    const newUser=new UserModel({
-    email, firstName, lastName, hashedPassword:password, country, street, zip 
+    email, firstName, lastName, hashedPassword:password, country, street, zip , isAdmin
    }).save()
    .then((data,error)=>{
        if(error)
@@ -48,7 +48,7 @@ module.exports.login=async (req,res,next)=>{
     if(isMatch)
     {
         const userId=user._id;
-        const token = jwt.sign({userId }, 'mostafa');
+        const token = jwt.sign({userId , isAdminCheck:user.isAdmin}, 'mostafa');
         console.log(user.name)
         res.status(200).json({ststus:"success",data:
         {token,userId,name:user.name, isAdmin:user.isAdmin, firstName:user.firstName, lastName:user.lastName}})

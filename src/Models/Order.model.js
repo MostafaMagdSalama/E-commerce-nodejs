@@ -9,12 +9,13 @@ const orderSchema=new Schema({
         quantity:{
             required:true, 
             type:Number
-        },
+        }
+    }],
+    
         price:{
             required:true, 
             type:Number
-        }
-    }],
+        },
     userId:{
         required:true,
         type:mongoose.Types.ObjectId
