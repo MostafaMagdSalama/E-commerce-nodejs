@@ -1,12 +1,19 @@
 const OrderModel = require("../Models/Order.model");
+const ProdutModel = require("../Models/Product.model")
 const ApiError =require('../Helpers/ApiError')
 const checkout = async (req, res, next) => {
-  const { products } = req.body;
+  const { products , price } = req.body;
   const userId = req.userId;
-  const order = new OrderModel({ products, userId });
+  const order = new OrderModel({ products, userId , price });
   const status = await order.save();
   if (status) {
+    // console.log(status.products);
+    status.products.map(async({productId,quantity})=>{
+   const result= await   ProdutModel.updateOne({_id:productId},{$inc:{quantity:-quantity}})
+   console.log(result);
+    })
     res.status(200).send(status);
+    // console.log(status);
     return;
   }
   next(ApiError.forbiddenRequest('resouses not found'))

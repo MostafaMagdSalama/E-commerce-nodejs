@@ -12,7 +12,7 @@ const orderSchema=new Schema({
         }
     }],
     
-        price:{
+     price:{
             required:true, 
             type:Number
         },
