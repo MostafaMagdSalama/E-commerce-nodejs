@@ -5,9 +5,9 @@ const { body, validationResult } = require('express-validator');
 const verifingAdminMiddleware= require('../Middlewares/VerifingAdmin.Middleware')
 
 router.get('/get_all_products',getAllProducts)
-router.get('/get_product_details',getProductDetails)
+router.post('/get_product_details',getProductDetails)
 router.post('/add_product',verifingAdminMiddleware,addProduct)
 router.put('/update_product',verifingAdminMiddleware,updateProduct)
-router.delete('/delete_product',verifingAdminMiddleware,deleteProduct)
+router.post('/delete_product',verifingAdminMiddleware,deleteProduct)
 
 module.exports = router;

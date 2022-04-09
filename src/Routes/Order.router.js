@@ -6,7 +6,7 @@ const {checkout,adminVerify,getAllOrders,getOrder} =require('../Controllers/Orde
 router.post('/checkout',handleAuthenticatedUser,checkout)
 router.put('/verify_order',verifingAdmin,adminVerify)
 // get all orders
-router.post('/getAllOrders',getAllOrders)
+router.get('/getAllOrders',getAllOrders)
 router.post('/getOrder',handleAuthenticatedUser,getOrder)
 //get order by each user
 module.exports = router;

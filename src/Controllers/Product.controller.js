@@ -7,7 +7,7 @@ const _ = require('lodash')
 module.exports.getAllProducts = async (req, res, next) => {
     try {
         const products = await ProductModel.find();
-        res.status(200).json({ status: "success", products });
+        res.status(200).json(products );
     }
     catch (err) {
         next(ApiError.internalRequest(err.message))
@@ -15,10 +15,10 @@ module.exports.getAllProducts = async (req, res, next) => {
 }
 
 module.exports.addProduct = async (req, res, next) => {
-    const { name, price, quantity, description, details, pictures } = req.body;
+    const { name, price, quantity, description, categoryId, pictures } = req.body;
     try {
 
-        const newProduct = new ProdctModel({ name, price, quantity, description, details, pictures })
+        const newProduct = new ProdctModel({ name, price, quantity, description, categoryId, pictures })
             .save()
         const data = await newProduct;
         res.status(200).json({ status: "success", data });
@@ -28,9 +28,9 @@ module.exports.addProduct = async (req, res, next) => {
     }
 }
 module.exports.updateProduct = async (req, res, next) => {
-    const { name, price, quantity, description, details, pictures, productId } = req.body;
+    const { name, price, quantity, description, categoryId, pictures, productId } = req.body;
     try {
-        const product = await ProductModel.updateOne({ _id: productId }, { name, price, quantity, description, details, pictures });
+        const product = await ProductModel.updateOne({ _id: productId }, { name, price, quantity, description, categoryId, pictures });
         res.status(200).json({ status: "success", product });
     }
     catch (err) {
@@ -57,7 +57,7 @@ module.exports.getProductDetails = async (req, res, next) => {
             next(ApiError.forbiddenRequest("product not found"))
             return;
         }
-        res.status(200).json({ status: "success", product });
+        res.status(200).json(   product );
     }
     catch (err) {
         next(ApiError.internalRequest(err.message))

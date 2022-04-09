@@ -2,14 +2,14 @@ const OrderModel = require("../Models/Order.model");
 const ProdutModel = require("../Models/Product.model")
 const ApiError =require('../Helpers/ApiError')
 const checkout = async (req, res, next) => {
-  const { products , price } = req.body;
+  const { products , price , date} = req.body;
   const userId = req.userId;
-  const order = new OrderModel({ products, userId , price });
+  const order = new OrderModel({ products, userId , price ,date});
   const status = await order.save();
   if (status) {
     // console.log(status.products);
-    status.products.map(async({productId,quantity})=>{
-   const result= await   ProdutModel.updateOne({_id:productId},{$inc:{quantity:-quantity}})
+    status.products.map(async({product,quantity})=>{
+   const result= await   ProdutModel.updateOne({_id:product.id},{$inc:{quantity:-quantity}})
    console.log(result);
     })
     res.status(200).send(status);

@@ -19,8 +19,7 @@ const productSchema=new Schema({
     },
     categoryId:{
         required:false,
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Category"
+        type:Number,
     },
     pictures:{
         required:false,
