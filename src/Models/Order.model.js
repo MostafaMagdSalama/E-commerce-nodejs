@@ -28,7 +28,7 @@ const orderSchema=new Schema({
                 type:String,
                 ref:"Category"
             },
-            pictures:{
+            picture:{
                 required:false,
                 type:String
             }

@@ -21,7 +21,7 @@ const productSchema=new Schema({
         required:false,
         type:Number,
     },
-    pictures:{
+    picture:{
         required:false,
         type:String
     }

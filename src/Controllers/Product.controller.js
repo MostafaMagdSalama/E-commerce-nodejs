@@ -15,10 +15,10 @@ module.exports.getAllProducts = async (req, res, next) => {
 }
 
 module.exports.addProduct = async (req, res, next) => {
-    const { name, price, quantity, description, categoryId, pictures } = req.body;
+    const { name, price, quantity, description, categoryId, picture } = req.body;
     try {
 
-        const newProduct = new ProdctModel({ name, price, quantity, description, categoryId, pictures })
+        const newProduct = new ProdctModel({ name, price, quantity, description, categoryId, picture })
             .save()
         const data = await newProduct;
         res.status(200).json({ status: "success", data });
@@ -28,9 +28,10 @@ module.exports.addProduct = async (req, res, next) => {
     }
 }
 module.exports.updateProduct = async (req, res, next) => {
-    const { name, price, quantity, description, categoryId, pictures, productId } = req.body;
+    const { name, price, quantity, description, categoryId, picture, productId } = req.body;
     try {
-        const product = await ProductModel.updateOne({ _id: productId }, { name, price, quantity, description, categoryId, pictures });
+        console.log("product,",productId );
+        const product = await ProductModel.updateOne({ _id: productId }, { name, price, quantity, description, categoryId, picture });
         res.status(200).json({ status: "success", product });
     }
     catch (err) {
